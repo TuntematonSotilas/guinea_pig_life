@@ -7,6 +7,7 @@ Guinea Pig life
 * On windows install the `C++ MSVC Build Tool`
 * Install cargo-ndk : `cargo install cargo-ndk` 
 * Install gradle : https://gradle.org
+* Generate gradle/wrapper, gradlew, and gradle.bat with: `gradle wrapper`
 
 ## Build
 
