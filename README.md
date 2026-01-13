@@ -2,7 +2,7 @@
 
 Guinea Pig life
 
-![icon](app\src\main\res\mipmap-hdpi\ic_launcher.webp)
+![icon](app/src/main/res/mipmap-hdpi/ic_launcher.webp)
 
 ## Install
 
