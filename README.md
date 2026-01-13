@@ -1,5 +1,8 @@
 # guinea_pig_life
+
 Guinea Pig life
+
+![icon](app\src\main\res\mipmap-hdpi\ic_launcher.webp)
 
 ## Install
 
@@ -20,3 +23,7 @@ Guinea Pig life
 
 Open the folder `app` with Android Studio and Run
 
+
+## Palette 
+
+https://colorhunt.co/palette/a8df8ef0ffdfffd8dfffaab8
