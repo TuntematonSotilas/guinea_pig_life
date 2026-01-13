@@ -12,12 +12,12 @@ task prepareKotlinBuildScriptModel {
 
 android {
     namespace 'org.bevyengine.guinea_pig_life'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "org.bevyengine.guinea_pig_life"
-        minSdk 31
-        targetSdk 33
+        minSdk 24
+        targetSdk 36
         versionCode 1
         versionName "1.0"
         // need this otherwise it won't insert libc++_shared.so

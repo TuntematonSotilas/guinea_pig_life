@@ -18,6 +18,7 @@ Cargo.lock
 # android
 .gradle
 .idea
+.cxx
 build
 gradle/wrapper
 gradlew
@@ -25,3 +26,4 @@ gradlew.bat
 /app/src/main/jniLibs
 /app/local.properties
 /app/gradle/wrapper
+/app/release
