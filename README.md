@@ -14,4 +14,9 @@ Guinea Pig life
 
 ## Build
 
-* cargo ndk -t arm64-v8a -o app/src/main/jniLibs build --package guinea_pig_life
+`cargo ndk -t arm64-v8a -o app/src/main/jniLibs build --package guinea_pig_life`
+
+## Debug 
+
+Open the folder `app` with Android Studio and Run
+

@@ -16,9 +16,12 @@ Cargo.lock
 **/mutants.out*/
 
 # android
-build
 .gradle
+.idea
+build
 gradle/wrapper
 gradlew
 gradlew.bat
-app/src/main/jniLibs
+/app/src/main/jniLibs
+/app/local.properties
+/app/gradle/wrapper
