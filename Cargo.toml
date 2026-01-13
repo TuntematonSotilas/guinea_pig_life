@@ -5,3 +5,16 @@ edition = "2024"
 
 [dependencies]
 bevy = "0.17.3"
+
+[lib]
+name = "guinea_pig_life"
+path = "src/lib.rs"
+crate-type = [
+    "staticlib",
+    "cdylib",    # needed for Android
+    "rlib",      # rlib needed for running locally
+]
+
+[[bin]]
+name = "guinea_pig_life"
+path = "src/main.rs"
