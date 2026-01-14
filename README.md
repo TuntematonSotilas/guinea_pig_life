@@ -1,6 +1,8 @@
 # guinea_pig_life
 
-Guinea Pig life
+Guinea pig life 
+
+A game where you play a Guinea Pig
 
 ![icon](app/src/main/res/mipmap-hdpi/ic_launcher.webp)
 
@@ -9,11 +11,19 @@ Guinea Pig life
 * Add Rust targets : `rustup target add x86_64-linux-android aarch64-linux-android`
 * On windows install the `C++ MSVC Build Tool` from Visual Studio
 * Install cargo-ndk : `cargo install cargo-ndk` 
+* Install Android Studio and add env variables : `ANDROID_HOME` ; `ANDROID_SDK_ROOT` ; `JAVA_HOME`
 * Install gradle : https://gradle.org and add in Path
-* Install Android Studio and add env variables : `ANDROID_HOME` and `ANDROID_SDK_ROOT`
 * Install the `Android SDK Command-line Tools` from Android Studio (`Tool > Android SDK > SDK Tool`)
 * Accept Android NDK licence `sdkmanager --licenses` 
 * Generate gradle/wrapper, gradlew, and gradle.bat with: `gradle wrapper`
+
+Example of .barshrc : 
+```
+export JAVA_HOME="$HOME/android-studio/jbr"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+alias gradle="$HOME/gradle/bin/gradle"
+```
 
 ## Build
 
