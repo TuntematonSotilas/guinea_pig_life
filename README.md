@@ -23,6 +23,7 @@ A game where you play a Guinea Pig
 * Install gradle : https://gradle.org and add in Path
 * Install the `Android SDK Command-line Tools` from Android Studio (`Tool > Android SDK > SDK Tool`)
 * Accept Android NDK licence `sdkmanager --licenses` 
+* Generate gradle/wrapper and gradlew with: `gradle wrapper`
 
 Example of .barshrc : 
 ```
@@ -35,12 +36,12 @@ alias gradle="$HOME/gradle/bin/gradle"
 
 ## Build
 
-* Generate gradle/wrapper and gradlew with: `gradle wrapper`
-* Build :`cargo ndk -t arm64-v8a -o app/src/main/jniLibs build --package guinea_pig_life`
+Build : `cargo ndk -t arm64-v8a -o app/src/main/jniLibs build --package guinea_pig_life`
 
 ## Run 
 
 To run on Android : Open the folder `app` with Android Studio and Run
+
 To run on Desktop : `cargo run`
 
 ## Palette 
