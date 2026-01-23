@@ -29,17 +29,31 @@ pub fn move_player(time: Res<Time>,
     }
 }
 
-pub fn mouse_click_system(buttons: Res<ButtonInput<MouseButton>>, 
+pub fn mouse_click_system(
+    buttons: Res<ButtonInput<MouseButton>>, 
+    touches: Res<Touches>,
     camera_q: Single<(&Camera, &GlobalTransform)>,
     window: Single<&Window>,
     mut player: Single<&mut Player>) {
 
-    // Left button was pressed  
+    let mut click_pos = None;
     if buttons.just_pressed(MouseButton::Left) {
+        if let Some(win_pos) = window.cursor_position() {
+            click_pos = Some(win_pos);
+        }
+    } else {
+        for finger in touches.iter() {
+                if touches.just_pressed(finger.id()) {
+                    click_pos = Some(finger.position());
+                }
+            }
+    }
+
+    // Left button was pressed  
+    if let Some(click_pos) = click_pos {
         // Calculate a world position based on the cursor's position
         let (camera, camera_transform) = *camera_q;
-        if let Some(cursor_position) = window.cursor_position()
-            && let Ok(world_pos) = camera.viewport_to_world_2d(camera_transform, cursor_position) {
+        if let Ok(world_pos) = camera.viewport_to_world_2d(camera_transform, click_pos) {
                 player.target = Vec3::new(world_pos.x, world_pos.y, 0.0);
         }
     }
