@@ -43,8 +43,6 @@ pub fn move_player(time: Res<Time>, player_q: Single<(&mut Transform, &mut Sprit
         } else { 
             player.frame_timer.tick(time.delta());
 
-            log::info!("is moving");
-
             if player.frame_timer.just_finished() {
                 let mut index = sprite.texture_atlas.as_ref().unwrap().index;
                 if player.is_first_frame {
@@ -52,7 +50,6 @@ pub fn move_player(time: Res<Time>, player_q: Single<(&mut Transform, &mut Sprit
                 } else {
                     index -= 1;
                 }
-                log::info!("index: {}", index);
 
                 sprite.texture_atlas.as_mut().unwrap().index = index;
 
