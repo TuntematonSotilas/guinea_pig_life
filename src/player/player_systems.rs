@@ -16,45 +16,67 @@ pub fn add_player(
             target: Vec3::new(0., 0., 0.), 
             speed: 200.,
             orientation: Orientation::Right,
-            old_orientation: Orientation::Right,
+            prev_orientation: Orientation::Right,
+            frame_timer: Timer::from_seconds(0.1, TimerMode::Repeating),
+            is_first_frame: true,
         },
         Sprite {
             image: texture.clone(),
             texture_atlas: Some(TextureAtlas {
                 layout: texture_atlas_layout.clone(),
-                index: 5,
+                index: 0,
             }),
             ..default()
         }
     ));
 }
 
-pub fn move_player(time: Res<Time>, mut player_q: Single<(&mut Transform, &Player)>,) {
-    let direction = player_q.1.target - player_q.0.translation; 
+pub fn move_player(time: Res<Time>, player_q: Single<(&mut Transform, &mut Sprite, &mut Player)>) {
+    let (mut transform, mut sprite, mut player) = player_q.into_inner();
+    let direction = player.target - transform.translation; 
     let distance = direction.length(); 
     if distance > 1.0 { 
-        let step =  player_q.1.speed * time.delta_secs(); 
+        let step =  player.speed * time.delta_secs(); 
         if step >= distance { 
             // the player have reached the target 
-            player_q.0.translation = player_q.1.target; 
+            transform.translation = player.target; 
         } else { 
+            player.frame_timer.tick(time.delta());
+
+            log::info!("is moving");
+
+            if player.frame_timer.just_finished() {
+                let mut index = sprite.texture_atlas.as_ref().unwrap().index;
+                if player.is_first_frame {
+                    index += 1;
+                } else {
+                    index -= 1;
+                }
+                log::info!("index: {}", index);
+
+                sprite.texture_atlas.as_mut().unwrap().index = index;
+
+                player.is_first_frame = !player.is_first_frame;
+            }
             // move the target
             let movement = direction.normalize() * step; 
-            player_q.0.translation += movement;
+            transform.translation += movement;
          }
     }
 }
 
-pub fn set_player_sprite(mut player_q: Single<(&mut Sprite, &mut Player)>,) {
-    if player_q.1.orientation != player_q.1.old_orientation {
-         let index = match player_q.1.orientation {
-            Orientation::Up => 1,
-            Orientation::Down => 3,
-            Orientation::Left => 7,
+pub fn set_player_sprite(player_q: Single<(&mut Sprite, &mut Player)>,) {
+    let (mut sprite, mut player) = player_q.into_inner();
+    if player.orientation != player.prev_orientation {
+        let index = match player.orientation {
+            Orientation::Up => 0,
+            Orientation::Down => 2,
+            Orientation::Left => 6,
             Orientation::Right => 4,
         };
-        player_q.0.texture_atlas.as_mut().unwrap().index = index;
-        player_q.1.old_orientation = player_q.1.orientation;
+        sprite.texture_atlas.as_mut().unwrap().index = index;
+        player.prev_orientation = player.orientation;
+        player.is_first_frame = true;
     }
 }
 
@@ -88,8 +110,6 @@ pub fn mouse_click_system(
             // Set player orientation
             let target = Vec2::new(player.target.x, player.target.y);
             let direction = world_pos - target;
-
-            log::info!("direction {:?}", direction);
 
             if direction.x.abs() > direction.y.abs() { 
                 if direction.x > 0. { 

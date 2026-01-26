@@ -14,5 +14,7 @@ pub struct Player
     pub target: Vec3, 
     pub speed: f32,
     pub orientation: Orientation,
-    pub old_orientation: Orientation,
+    pub prev_orientation: Orientation,
+    pub frame_timer: Timer,
+    pub is_first_frame: bool,
 }
