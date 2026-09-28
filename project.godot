@@ -1,0 +1,61 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Guinea Pig Life"
+run/main_scene="res://scenes/boot/boot.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+boot_splash/bg_color=Color(0.96, 0.9, 0.84, 1)
+boot_splash/show_image=false
+config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://autoload/event_bus.gd"
+Settings="*res://autoload/settings.gd"
+SaveManager="*res://autoload/save_manager.gd"
+GameClock="*res://autoload/game_clock.gd"
+PlayerStats="*res://autoload/player_stats.gd"
+QuestManager="*res://autoload/quest_manager.gd"
+SceneLoader="*res://autoload/scene_loader.gd"
+
+[display]
+
+window/size/viewport_width=180
+window/size/viewport_height=320
+window/size/window_width_override=540
+window/size/window_height_override=960
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
+window/stretch/scale_mode="integer"
+window/handheld/orientation=1
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://data/i18n/translations.en.translation", "res://data/i18n/translations.fr.translation", "res://data/i18n/translations.de.translation")
+locale/fallback="en"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
