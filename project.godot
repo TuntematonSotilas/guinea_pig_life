@@ -44,7 +44,7 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://data/i18n/translations.en.translation", "res://data/i18n/translations.fr.translation", "res://data/i18n/translations.de.translation")
+locale/translations=PackedStringArray("res://data/i18n/translations.en.translation", "res://data/i18n/translations.fr.translation", "res://data/i18n/translations.de.translation", "res://data/i18n/translations.es.translation")
 locale/fallback="en"
 
 [physics]

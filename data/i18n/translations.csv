@@ -1,12 +1,12 @@
-keys,en,fr,de
-GAME_TITLE,Guinea Pig Life,Guinea Pig Life,Guinea Pig Life
-BOOT_LOADING,Loading...,Chargement...,Wird geladen...
-MENU_NEW,New game,Nouvelle partie,Neues Spiel
-MENU_CONTINUE,Continue,Continuer,Weiter
-MENU_LANGUAGE,Language,Langue,Sprache
-STAT_FOOD,Food,Nourriture,Futter
-STAT_WATER,Water,Eau,Wasser
-STAT_HEALTH,Health,Santé,Gesundheit
-STAT_HAPPINESS,Happiness,Bonheur,Glück
-ACTION_SQUEAK,Wheek!,Wiiik !,Wiiik!
-ACTION_NOSE_PUNCH,Nose punch,Coup de nez,Nasenstupser
+keys,en,fr,de,es
+GAME_TITLE,Guinea Pig Life,Guinea Pig Life,Guinea Pig Life,Guinea Pig Life
+BOOT_LOADING,Loading...,Chargement...,Wird geladen...,Cargando...
+MENU_NEW,New game,Nouvelle partie,Neues Spiel,Nueva partida
+MENU_CONTINUE,Continue,Continuer,Weiter,Continuar
+MENU_LANGUAGE,Language,Langue,Sprache,Idioma
+STAT_FOOD,Food,Nourriture,Futter,Comida
+STAT_WATER,Water,Eau,Wasser,Agua
+STAT_HEALTH,Health,Santé,Gesundheit,Salud
+STAT_HAPPINESS,Happiness,Bonheur,Glück,Felicidad
+ACTION_SQUEAK,Weeek!,Weeek !,Weeek!,¡Weeek!
+ACTION_NOSE_PUNCH,Nose punch,Coup de nez,Nasenstupser,Golpe de nariz

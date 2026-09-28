@@ -1,7 +1,7 @@
 extends Node
 ## Player preferences (language, volume). Persisted by SaveManager.
 
-const SUPPORTED_LOCALES: PackedStringArray = ["en", "fr", "de"]
+const SUPPORTED_LOCALES: PackedStringArray = ["en", "fr", "de", "es"]
 
 var locale: String = ""
 var music_volume: float = 0.8

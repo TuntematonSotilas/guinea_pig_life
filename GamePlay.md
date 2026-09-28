@@ -1,6 +1,6 @@
 # Guinea Pig Life — Game Design (GamePlay)
 
-> Document de référence du gameplay. Écran **portrait**, pixel art style Game Boy Color, Godot 4.7, Android, EN/FR/DE.
+> Document de référence du gameplay. Écran **portrait**, pixel art style Game Boy Color, Godot 4.7, Android, EN/FR/DE/ES.
 
 ## Pitch
 *Guinea Pig Life* est un jeu cozy : tu es un petit cochon d'inde qui vit dans une maison. Une famille humaine y habite,
@@ -19,19 +19,19 @@ Tu fais pousser tes légumes, tu explores, tu trouves des trésors. **Le jour** 
 ## La journée type
 | Moment | Ce qui se passe | Gameplay |
 |---|---|---|
-| Matin (6h–9h) | Les humains passent en coup de vent avant de partir, bruit du frigo | Un **Wiiik !** au bon moment : un humain jette un légume en passant (petit bonus). Le **distributeur** de la PigRoom se déclenche. |
+| Matin (6h–9h) | Les humains passent en coup de vent avant de partir, bruit du frigo | Un **Weeek !** au bon moment : un humain jette un légume en passant (petit bonus). Le **distributeur** de la PigRoom se déclenche. |
 | Journée (9h–18h) | La maison est vide, à toi ! | **Potager** (arroser, récolter), ménage de la PigRoom, visites aux **amis animaux**, mini-jeux, quêtes |
 | Soir (18h–21h) | La famille rentre et dîne | **Événement de fond** : des miettes tombent de la table (bonus Food si tu es rapide). L'enfant passe parfois faire un câlin (bonus Happiness aléatoire). |
-| Nuit (21h–6h) | Tout le monde dort, lumière tamisée | **Exploration** : raid dans la cuisine, trésors cachés, zones sombres (halo de vision autour du cochon), **Wiiik sonar** — attention à ne pas réveiller Minou |
+| Nuit (21h–6h) | Tout le monde dort, lumière tamisée | **Exploration** : raid dans la cuisine, trésors cachés, zones sombres (halo de vision autour du cochon), **Weeek sonar** — attention à ne pas réveiller Minou |
 
 ## Les actions du cochon
-- **Wiiik (cri)** : appeler ses amis animaux, activer le distributeur plus tôt, attirer un humain qui passe.
+- **Weeek (cri)** : appeler ses amis animaux, activer le distributeur plus tôt, attirer un humain qui passe.
   La nuit, c'est un **sonar** : il révèle un court instant les trésors cachés dans le noir.
-  Clin d'œil réaliste : un bruit de sachet plastique ou de frigo → le cochon wiiik tout seul.
+  Clin d'œil réaliste : un bruit de sachet plastique ou de frigo → le cochon fait Weeek tout seul.
   Un temps de recharge court évite le spam.
 - **Nose punch (coup de nez)** : pousser des objets (balle, carotte, crotte, carton), faire tomber un légume d'une
   table basse, ouvrir le portillon ou une porte entrouverte, faire fuir Minou (tant qu'il est encore rival).
-- **Manger / Boire** : aux gamelles, au biberon, au foin, avec les légumes trouvés (chaque légume a son effet).
+- **Manger / Boire** : aux gamelles, au distributeur d'eau, au foin, avec les légumes trouvés (chaque légume a son effet).
 - **Poop** : automatique après avoir mangé (animation drôle). Les crottes baissent **Health** si on ne les pousse pas
   dans la litière (nose punch). Une fois réparé, **Robby l'aspirateur robot** en ramasse aussi dans une pièce par jour.
 - **Popcorning** (vrai comportement des cochons d'inde) : quand Happiness > 80, le cochon fait des petits bonds de joie
@@ -43,7 +43,7 @@ Tu fais pousser tes légumes, tu explores, tu trouves des trésors. **Le jour** 
 | Jauge | Baisse | Remonte | À 0 |
 |---|---|---|---|
 | Food | avec le temps | légumes, foin, granulés | le cochon est affaibli (plus lent) |
-| Water | avec le temps (plus vite le jour) | biberon, gamelle | le cochon est affaibli |
+| Water | avec le temps (plus vite le jour) | distributeur d'eau, fontaine | le cochon est affaibli |
 | Health | crottes au sol, Food/Water à 0 | ménage, sommeil, vitamine C (poivron, orange) | **visite chez le véto** : la journée s'arrête, perte d'un peu d'XP (pas de game over) |
 | Happiness | ennui, solitude | jouets, mini-jeux, visites aux amis animaux, câlin surprise de l'enfant, amis cochons | le cochon boude (pas de popcorning, XP réduite) |
 
@@ -53,7 +53,7 @@ Tu fais pousser tes légumes, tu explores, tu trouves des trésors. **Le jour** 
   On y trouve :
   - la **maisonnette/igloo** (le cochon y dort, ce qui termine la journée et sauvegarde) ;
   - le **râtelier à foin** (Food illimité mais peu nourrissant) ;
-  - le **biberon** (Water, qui se recharge chaque matin) et le **distributeur automatique** de granulés (heures fixes, ou déclenché par un Wiiik) ;
+  - le **distributeur d'eau** (Water, qui se recharge chaque matin) et le **distributeur automatique** de granulés (heures fixes, ou déclenché par un Weeek) ;
   - le **potager** : des bacs où planter, arroser et récolter carottes, salade, poivron, etc. Chaque légume a son effet ;
   - le **coin litière** (c'est là qu'on pousse les crottes pour garder Health) ;
   - une **mezzanine avec rampe** ;
@@ -75,7 +75,7 @@ Tu fais pousser tes légumes, tu explores, tu trouves des trésors. **Le jour** 
 **Les humains (en fond)** : ce sont des PNJ simples, qui traversent les pièces à certaines heures, avec peu d'animations
 (marche + une pose). Ils ne donnent pas de quêtes.
 - **L'enfant** : parfois un câlin surprise le soir (bonus Happiness).
-- **Le parent** : il jette un légume le matin si tu wiiik au bon moment, et fait tomber des miettes au dîner.
+- **Le parent** : il jette un légume le matin si tu fais Weeek au bon moment, et fait tomber des miettes au dîner.
 
 **La communauté d'animaux (au cœur du jeu)** : chacun a une **jauge d'amitié**, des quêtes et des cadeaux.
 - **Pipou la souris** (Kitchen) : le guide du tutoriel. Elle connaît les passages secrets et les trésors cachés.
@@ -90,7 +90,7 @@ Tu fais pousser tes légumes, tu explores, tu trouves des trésors. **Le jour** 
 1. **Tunnel Run** : courir dans des tunnels en carton, en évitant des obstacles (swipe).
 2. **Cache-carotte** : trouver les légumes cachés par Pipou avant la fin du chrono.
 3. **Nose Foot** : pousser une balle dans un but à coups de nez.
-4. **Wiiik Rhythm** : taper en rythme sur la musique pour faire chanter le cochon.
+4. **Weeek Rhythm** : taper en rythme sur la musique pour faire chanter le cochon.
 
 ## Quêtes et XP
 - **Quêtes du jour** (3 par jour, tirées au hasard, affichées sur le tableau de la PigRoom ou données par les animaux) :
@@ -120,7 +120,7 @@ Tu fais pousser tes légumes, tu explores, tu trouves des trésors. **Le jour** 
   envie de revenir voir son cochon sans être puni.
 
 ## Pourquoi ça marche en portrait
-- Un seul pouce suffit : taper pour se déplacer, boutons Wiiik et Coup de nez en bas de l'écran.
+- Un seul pouce suffit : taper pour se déplacer, boutons Weeek et Coup de nez en bas de l'écran.
 - Pièces verticales, avec une caméra qui défile doucement.
 - Idéal pour des sessions courtes, un peu comme un Tamagotchi moderne.
 
@@ -129,8 +129,8 @@ Rôles autrefois tenus par les humains, et ce qui les assure désormais (les hum
 
 | Rôle | Assuré par |
 |---|---|
-| Apporter à manger | **Distributeur automatique** dans la PigRoom : il se déclenche à heures fixes, et le cochon le lance plus tôt avec un Wiiik. Un **potager** dans la PigRoom : planter, arroser et récolter les légumes, pour une petite boucle de ferme. Des **raids en cuisine** la nuit. |
-| Remplir l'eau | **Fontaine à eau** dans la cuisine. Le biberon de la PigRoom se recharge une fois par jour. |
+| Apporter à manger | **Distributeur automatique** dans la PigRoom : il se déclenche à heures fixes, et le cochon le lance plus tôt avec un Weeek. Un **potager** dans la PigRoom : planter, arroser et récolter les légumes, pour une petite boucle de ferme. Des **raids en cuisine** la nuit. |
+| Remplir l'eau | **Fontaine à eau** dans la cuisine. Le distributeur d'eau de la PigRoom se recharge une fois par jour. |
 | Faire le ménage | Le cochon pousse ses crottes à la litière. **Robby l'aspirateur robot** devient un allié : on le « répare » en quête, puis il nettoie une pièce par jour. |
 | Câlins / jeux | Une **communauté d'animaux** : Pipou la souris (guide du tutoriel), Minou le chat (qui passe de rival à ami), un oiseau à la fenêtre, un poisson rouge… Il y a une **jauge d'amitié** par animal, les jouets et les mini-jeux. |
 | Donner des quêtes | Les animaux PNJ, ainsi qu'un **tableau de quêtes** dans la PigRoom (des post-it du frigo). |
@@ -148,7 +148,7 @@ manquantes (**bleu** pour l'eau, **pêche** pour la nourriture).
 |---|---|---|---|
 | Crème (base) | `#FAF3F0` | `#E6D5CC` | fond des panneaux, écran de chargement, splash Android |
 | Sauge | `#D4E2D4` | `#8FB08F` | jauge **Health**, boutons « OK / Continuer » |
-| Rose | `#FFCACC` | `#E8868B` | jauge **Happiness**, bouton **Wiiik**, cœurs |
+| Rose | `#FFCACC` | `#E8868B` | jauge **Happiness**, bouton **Weeek**, cœurs |
 | Lavande | `#DBC4F0` | `#A58BC9` | barre d'**XP**, quêtes, teinte de nuit |
 | + Bleu | `#C9E1F2` | `#7FAED6` | jauge **Water** |
 | + Pêche | `#FFE3C2` | `#F2A65A` | jauge **Food** |

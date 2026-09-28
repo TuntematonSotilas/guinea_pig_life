@@ -1,7 +1,7 @@
 # Guinea Pig Life — Plan de développement
 
 > Document technique de référence. Le design du jeu est décrit dans [GamePlay.md](GamePlay.md).
-> Cible : **Android**, écran **portrait**, **Godot 4.7** (renderer Mobile) + **GDScript**, pixel art style Game Boy Color, EN/FR/DE.
+> Cible : **Android**, écran **portrait**, **Godot 4.7** (renderer Mobile) + **GDScript**, pixel art style Game Boy Color, EN/FR/DE/ES.
 
 ---
 
@@ -31,7 +31,7 @@
 │  VUE JEU     │  Camera2D qui suit le cochon
 │  (pièce)     │
 ├──────────────┤
-│ [Wiiik][👃]  │  boutons d'action (zone du pouce)
+│ [Weeek][👃]  │  boutons d'action (zone du pouce)
 │ [Quêtes][☰]  │
 └──────────────┘
 ```
@@ -57,7 +57,7 @@ res://
 │   ├── boot/                 # Boot (loader) → MainMenu
 │   ├── ui/                   # MainMenu, HUD, QuestBoard, Inventory, Pause, DaySummary, Dialogue
 │   ├── actors/               # GuineaPig, Companion, Npc (base), Mouse, Cat, Robby, Bird, Fish, Human
-│   ├── props/                # Interactable (base), Bowl, Bottle, Feeder, HayRack, GardenPlot, Litter,
+│   ├── props/                # Interactable (base), Bowl, WaterDispenser, Feeder, HayRack, GardenPlot, Litter,
 │   │                         # Poop, Treasure, DecoSlot, Gate, Door, Toy
 │   ├── rooms/                # PigRoom, Bedroom, Kitchen, LivingRoom
 │   └── minigames/            # NoseFoot, HideCarrot (v1) ; TunnelRun, WheekRhythm (plus tard)
@@ -94,7 +94,7 @@ res://
 - **Toucher le sol** : le cochon s'y rend (pathfinding sur `NavigationRegion2D`, construite à partir des `TileMapLayer`).
 - **Toucher un `Interactable`** : le cochon s'en approche, puis fait l'action automatiquement.
 - **Boutons** :
-  - **Wiiik** : appel, déclenchement du distributeur, sonar la nuit, avec un temps de recharge.
+  - **Weeek** : appel, déclenchement du distributeur, sonar la nuit, avec un temps de recharge.
   - **Coup de nez** : pousse l'objet ou le PNJ qui se trouve devant le cochon.
 - Un retour haptique (`Input.vibrate_handheld`) accompagne les actions, s'il est activé dans les réglages.
 
@@ -122,8 +122,8 @@ res://
 ### 3.5 La PigRoom (la pièce de base)
 - **Maisonnette** : dormir termine la journée, puis affiche l'écran `DaySummary` et lance la sauvegarde.
 - **Râtelier à foin** : Food illimité, mais peu nourrissant.
-- **Biberon** : se recharge chaque matin.
-- **Distributeur** : se déclenche à heures fixes, ou plus tôt avec un Wiiik à proximité.
+- **Distributeur d'eau** : se recharge chaque matin.
+- **Distributeur de granulés** : se déclenche à heures fixes, ou plus tôt avec un Weeek à proximité.
 - **Potager** : des parcelles `GardenPlot` passent par les états vide → planté → arrosé → pousse → mûr. La pousse avance en heures de jeu.
 - **Litière** : pousser une crotte dedans la supprime et remonte Health.
 - **Emplacements de déco** : on y place des trésors ou des objets de déco, sauvegardés par emplacement.
@@ -136,10 +136,10 @@ res://
 
 ### 3.7 Les humains (en fond)
 - Des PNJ `Human` non interactifs, qui traversent une pièce à certaines heures, avec peu d'animations (marche et une pose).
-- Le matin, un Wiiik au bon moment fait tomber un légume en bonus.
+- Le matin, un Weeek au bon moment fait tomber un légume en bonus.
 
 ### 3.8 Nuit : exploration
-- Les **trésors** (`Treasure`) sont cachés dans des zones sombres. Le **sonar Wiiik** les révèle 2 à 3 s (shader d'outline, ou sprite qui clignote).
+- Les **trésors** (`Treasure`) sont cachés dans des zones sombres. Le **sonar Weeek** les révèle 2 à 3 s (shader d'outline, ou sprite qui clignote).
 - Minou peut dormir sur le chemin. Si on fait trop de bruit près de lui, il se réveille et bloque le passage.
 
 ### 3.9 Quêtes (`quest_manager.gd`)
@@ -151,14 +151,14 @@ res://
 ### 3.10 Mini-jeux (pour la Happiness)
 - Ce sont des scènes séparées, lancées depuis la LivingRoom par `SceneLoader`. Elles renvoient un score, converti en Happiness et en XP.
 - **v1** : **Nose Foot** (physique `RigidBody2D` sur une balle) et **Cache-carotte** (chrono + objets cachés).
-- **Plus tard** : Tunnel Run et Wiiik Rhythm.
+- **Plus tard** : Tunnel Run et Weeek Rhythm.
 
 ### 3.11 UI et i18n
 - **Thème** `cosy_theme.tres` : `StyleBoxFlat` avec fond crème, bordure encre de 1 px, coins de 2 px et ombre de 1 px. `palette.gd` reprend les mêmes couleurs pour le code.
 - **Écrans** : MainMenu (New / Continue / Langue / Réglages), HUD, QuestBoard, Inventaire, Dialogue, DaySummary et Pause.
-- **Traductions** : un fichier `translations.csv` (clé, en, fr, de), `tr()` partout, et aucun texte en dur.
+- **Traductions** : un fichier `translations.csv` (clé, en, fr, de, es), `tr()` partout, et aucun texte en dur.
   Au premier lancement, la langue est celle du téléphone (`settings.gd` ✅).
-- **Police** : une police pixel qui gère les accents FR/DE et le ß.
+- **Police** : une police pixel qui gère les accents FR/DE/ES, le ß, le ñ et les signes ¿ ¡.
 
 ---
 
@@ -215,21 +215,21 @@ Principe : on reste en **placeholders** (formes simples) jusqu'à la fin du **ja
 |---|---|---|
 | **0. Setup** *(en cours)* | Réglages portrait/pixel ✅, arborescence ✅, traductions ✅, `event_bus` ✅, `settings` ✅. Reste : `palette.gd`, thème, squelettes des autres autoloads, scène Boot, SpriteFrames de `gp.png`, plugin SQLite, **1er APK sur téléphone** | L'app s'ouvre en portrait sur le téléphone |
 | **1. Déplacement** | PigRoom en tiles placeholder, cochon (`gp.png`), touch-to-go + navigation, caméra, HUD et boutons | On se promène dans la PigRoom |
-| **2. Soins** | `Interactable`, foin, biberon, distributeur, litière, crottes et coup de nez, jauges + HUD, Wiiik | Boucle de soin jouable |
+| **2. Soins** | `Interactable`, foin, distributeur d'eau, distributeur de granulés, litière, crottes et coup de nez, jauges + HUD, Weeek | Boucle de soin jouable |
 | **3. Temps** | GameClock, phases, jour/nuit, maisonnette + fin de journée + DaySummary | Une journée complète |
 | **4. Sauvegarde** | SaveManager SQLite, Continue/New, autosave, hors-ligne | Quitter et reprendre |
 | **🎯 Jalon A : vertical slice** | **PigRoom complète et jouable en boucle** | On teste le fun |
 | **5. Potager et inventaire** | GardenPlot, graines et légumes, Inventory, effets des légumes | Boucle de ferme |
 | **6. Maison** | Bedroom, Kitchen, LivingRoom, portes et portillon, SceneLoader + fondu | Maison complète |
 | **7. PNJ et amitié** | Npc de base, dialogues, cadeaux, Pipou (tutoriel), Robby, Minou (rival puis ami), Cui-Cui, Bulle, humains en fond | Communauté vivante |
-| **8. Nuit** | Lumières, halo, trésors, sonar Wiiik, Minou endormi | Exploration nocturne |
+| **8. Nuit** | Lumières, halo, trésors, sonar Weeek, Minou endormi | Exploration nocturne |
 | **9. Quêtes et progression** | QuestManager, tableau de quêtes, quêtes du jour et histoire, XP, déblocages, déco de la PigRoom | Méta-progression |
 | **10. Mini-jeux v1** | Nose Foot, Cache-carotte | Happiness via le jeu |
 | **🎯 Jalon B : contenu v1** | Tout le gameplay en placeholders améliorés | Démo interne |
-| **11. Art et audio** | Sprites Aseprite (cochon 3 directions, animaux, décors), tilesets, UI pixel, sons (Wiiik !), musique chiptune jour/nuit | Style final |
-| **12. Menu, i18n, polish** | MainMenu animé, traductions complètes EN/FR/DE, police, splash natif + loader, effets visuels, vibrations | Première impression |
+| **11. Art et audio** | Sprites Aseprite (cochon 3 directions, animaux, décors), tilesets, UI pixel, sons (Weeek !), musique chiptune jour/nuit | Style final |
+| **12. Menu, i18n, polish** | MainMenu animé, traductions complètes EN/FR/DE/ES, police, splash natif + loader, effets visuels, vibrations | Première impression |
 | **13. Skins et multi-cochons** | Races, accessoires, cochons compagnons qui suivent | Récompenses long terme |
-| **14. Release** | Tests sur plusieurs appareils, performances, keystore release, AAB, fiche Play Store dans les 3 langues | Publication |
+| **14. Release** | Tests sur plusieurs appareils, performances, keystore release, AAB, fiche Play Store dans les 4 langues | Publication |
 
 ---
 
